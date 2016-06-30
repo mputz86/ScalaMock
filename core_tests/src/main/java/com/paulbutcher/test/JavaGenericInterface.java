@@ -22,5 +22,6 @@ package com.paulbutcher.test;
 
 public interface JavaGenericInterface<T> {
     public int compare(T other);
+    public int compare(T other, int other2);
     public int simpleMethod(String b);
 }

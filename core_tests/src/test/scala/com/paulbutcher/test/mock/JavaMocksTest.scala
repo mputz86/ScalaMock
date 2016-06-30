@@ -35,8 +35,8 @@ class JavaMocksTest extends IsolatedSpec {
   it should "mock classes with bridged methods" in {
     val m = mock[JavaClassWithBridgeMethod]
 
-    (m.compare _).expects(new Integer(5)).returning(1)
-    (m.compare _).expects(new Integer(6)).returning(2)
+    (m.compare(_: Integer)).expects(new Integer(5)).returning(1)
+    (m.compare(_: Integer)).expects(new Integer(6)).returning(2)
 
     def useBridgeMethod[T](gen: JavaGenericInterface[T], x: T) = {
       gen.compare(x)
