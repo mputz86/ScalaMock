@@ -23,7 +23,7 @@ import Keys._
 import sbt.inc.Analysis
 
 object BuildSettings {
-  val buildVersion = "3.2.2"
+  val buildVersion = "3.2.3-SNAPSHOT"
   val buildScalaVersion = "2.11.5"
 
   val buildSettings = Defaults.coreDefaultSettings ++ Seq(
@@ -37,12 +37,13 @@ object BuildSettings {
     resolvers += "Scalaz Bintray Repo" at "http://dl.bintray.com/scalaz/releases",
 
     publishTo <<= version { v =>
-      val nexus = "https://oss.sonatype.org/"
+      val nexus = "https://cich.innoq.io:8081/"
       if (v.trim.endsWith("SNAPSHOT"))
-        Some("snapshots" at nexus + "content/repositories/snapshots") 
+        Some("snapshots" at nexus + "repository/maven-snapshots")
       else
-        Some("releases" at nexus + "service/local/staging/deploy/maven2")
+        Some("releases" at nexus + "repository/maven-releases")
     },
+    credentials += Credentials(Path.userHome / ".ivy2" / ".credentials"),
     pomIncludeRepository := { _ => false },
     publishArtifact in Test := false,
     pomExtra := (
